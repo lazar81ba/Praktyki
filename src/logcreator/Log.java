@@ -22,7 +22,7 @@ public class Log {
             // TO DO : check directory
             String path = new java.io.File( "." ).getCanonicalPath()+"/Logs/"+name;
 
-
+            //tworze plik
             File file = new File(path);
             file.createNewFile();
 
