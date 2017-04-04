@@ -2,11 +2,11 @@
 public class Action {
     protected String option;
     protected Integer parameter = null;
-    public Action(String string){
-        option = string;
+    public Action(String option){
+        this.option = option;
     }
-    public Action(String string,Integer param){
-        option = string;
-        parameter = param;
+    public Action(String option,Integer parameter){
+        this.option = option;
+        this.parameter = parameter;
     }
 }

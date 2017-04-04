@@ -9,7 +9,7 @@ public class TestPlatform {
     public static void main(String argv[]){
 
         try {
-            Log.logCreate();
+            System.out.print(Client.describe());
         } catch (IOException e) {
             e.printStackTrace();
         }

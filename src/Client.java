@@ -4,16 +4,23 @@ import java.io.IOException;
 
 
 public class Client {
+    static String email = null;
+    static String token = null;
 
-    static Response request(Action action) throws IOException {
+    static void setAccount(Account account){
+        email = account.email;
+        token = account.token;
+    }
+
+    static String request(Action action) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body;
         if(action.parameter==null) {
-            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.option + "\", \"Login\":\"lazar81ba@gmail.com\", \"Token\":\"61ADBBB5AEBBEAF640AEBEBFD0CB751F\"}");
+            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.option + "\", \"Login\":\""+email+"\", \"Token\":\""+token+"\"}");
         }else{
-            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.option + "\", \"Login\":\"lazar81ba@gmail.com\", \"Token\":\"61ADBBB5AEBBEAF640AEBEBFD0CB751F\"}, \"Parameter\":\""+action.parameter.toString()+"\"}");
+            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.option + "\", \"Login\":\""+email+"\", \"Token\":\""+token+"\"}, \"Parameter\":\""+action.parameter.toString()+"\"}");
 
         }
         Request request = new Request.Builder()
@@ -25,10 +32,10 @@ public class Client {
                 .build();
 
         Response response = client.newCall(request).execute();
-        return response;
-    }
+        String output = response.body().string();
+        return output;    }
 
-    static Response describe() throws IOException {
+    static String describe() throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -39,6 +46,9 @@ public class Client {
                 .build();
 
         Response response = client.newCall(request).execute();
-        return response;
+
+        String output = response.body().string();
+        //TO DO: jakis regex zeby to sformatowac
+        return output;
     }
 }
