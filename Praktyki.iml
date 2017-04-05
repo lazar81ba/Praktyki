@@ -7,19 +7,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/okhttp-3.6.0.jar!/" />
+          <root url="jar://$USER_HOME$/Pulpit/okhttp-3.6.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/okio-1.11.0.jar!/" />
+          <root url="jar://$USER_HOME$/Pulpit/okio-1.11.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

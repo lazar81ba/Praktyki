@@ -1,3 +1,6 @@
+import appclases.Account;
+import appclases.Action;
+import appclases.Client;
 import logcreator.Log;
 
 import java.io.IOException;
@@ -7,10 +10,13 @@ import java.io.IOException;
  */
 public class TestPlatform {
     public static void main(String argv[]){
-
+        Account account= new Account("lazar81ba@gmail.com","61ADBBB5AEBBEAF640AEBEBFD0CB751F");
+        Client.setAccount(account);
         try {
-            System.out.print(Client.describe());
-        } catch (IOException e) {
+            Log log  = new Log();
+            log.setName("2017.04.05 16:41:57.txt");
+            log.writeLog(Client.describe(),new Action());
+        }  catch (Exception e) {
             e.printStackTrace();
         }
     }
