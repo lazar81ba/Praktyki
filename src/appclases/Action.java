@@ -2,20 +2,24 @@ package appclases;
 
 public class Action {
     private String option;
-    private Integer parameter;
+    private String parameter;
 
     public Action() {
-        option=null;
-        parameter=null;
+        option="";
+        parameter="";
     }
     public Action(String option){
         this.option = option;parameter=null;
     }
-    public Action(String option,Integer parameter){
+    public Action(String option,String parameter){
         this.option = option;
         this.parameter = parameter;
     }
 
+    public void resetAction(){
+        this.option="";
+        this.parameter="";
+    }
 
     public String getOption() {
         return option;
@@ -25,11 +29,11 @@ public class Action {
         this.option = option;
     }
 
-    public Integer getParameter() {
+    public String getParameter() {
         return parameter;
     }
 
-    public void setParameter(Integer parameter) {
+    public void setParameter(String parameter) {
         this.parameter = parameter;
     }
 }

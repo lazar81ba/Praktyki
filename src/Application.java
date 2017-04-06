@@ -1,19 +1,27 @@
 
 import appclases.*;
+import appclases.Action;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.Enumeration;
 
 
 import javax.swing.*;
 
 
 
-public class Application extends JFrame {
+public class Application extends JFrame implements ItemListener{
 
-    private Account account;
-    private JComboBox<String> box;
+    private Action action;
+    private JTextField parameterValue;
+    private JLabel actionLabel;
+    private JLabel communicationLabel;
+    private ButtonGroup group;
 
+
+    //options for RadioButtons
     private enum option{
         IMPORTFOOD ("Import Food",true),
         PRODUCE ("Produce",false),
@@ -31,12 +39,11 @@ public class Application extends JFrame {
         }
         private String action;
         private boolean parameter;
-        private String action(){return action;}
-        private boolean isParameter(){return parameter;}
+
     }
 
     public Application() {
-        account = new Account();
+        action = new Action();
         initUI();
     }
 
@@ -47,11 +54,7 @@ public class Application extends JFrame {
 
 
     private void createStartLayout() {
-        setTitle("JComboBox");
-        setSize(900, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
+        // labels, fields
         JLabel email = new JLabel("Email");
         email.setFont(new Font("Serif", Font.PLAIN, 16));
         email.setForeground(new Color(50, 50, 25));
@@ -64,19 +67,24 @@ public class Application extends JFrame {
         JTextField tokenText = new JTextField(25);
         JButton submitButton = new JButton("Submit");
 
+        JLabel errorLabel = new JLabel("Cannot make connection");
+        errorLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+        errorLabel.setForeground(new Color(250, 20, 10));
+        errorLabel.setVisible(false);
+
+        //setting email and token for convenience
         emailText.setText("lazar81ba@gmail.com");
         tokenText.setText("61ADBBB5AEBBEAF640AEBEBFD0CB751F");
 
 
         Container pane = getContentPane();
-
-        JPanel cp=new JPanel();
         pane.setLayout(new GridBagLayout());
-        add(cp);
 
+        //making new Panel
+        JPanel cp=new JPanel();
+        add(cp);
         GroupLayout gl = new GroupLayout(cp);
         cp.setLayout(gl);
-
         gl.setAutoCreateGaps(true);
         gl.setAutoCreateContainerGaps(true);
 
@@ -87,6 +95,7 @@ public class Application extends JFrame {
                     .addComponent(token)
                     .addComponent(tokenText)
                     .addComponent(submitButton)
+                    .addComponent(errorLabel)
         );
         gl.setVerticalGroup(
                 gl.createSequentialGroup()
@@ -95,10 +104,11 @@ public class Application extends JFrame {
                     .addComponent(token)
                     .addComponent(tokenText)
                     .addComponent(submitButton)
+                    .addComponent(errorLabel)
         );
 
 
-
+        //listener for email text field if it changes, also checking email format
         emailText.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent event) {
                 String content = emailText.getText();
@@ -110,13 +120,17 @@ public class Application extends JFrame {
             }
         });
 
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                account.setEmail(emailText.getText());
-                account.setToken(tokenText.getText());
-                remove(cp);
+        //button listener, setting account in client,removing panel
+        submitButton.addActionListener(event -> {
+            Client.setAccount(new Account(emailText.getText(),tokenText.getText()));
+
+            try {
+                if(!Client.describe().equals("")){
+                    remove(cp);
                 createActionLayout();
+                }else errorLabel.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
 
@@ -124,13 +138,14 @@ public class Application extends JFrame {
         repaint();
         pack();
         setTitle("JComboBox");
-        setSize(1366, 768);
+        setSize(900, 940);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
     }
 
-    private void createActionLayout(){
+
+    private void createActionLayout() throws IOException {
 
         Container pane = getContentPane();
         GroupLayout gl = new GroupLayout(pane);
@@ -139,64 +154,161 @@ public class Application extends JFrame {
         gl.setAutoCreateContainerGaps(true);
         gl.setAutoCreateGaps(true);
 
-        JButton test1 = new JButton("test1");
-        JButton test2 = new JButton("test2");
-        JTextArea area1 = new JTextArea();
-        JTextArea area2 = new JTextArea();
-        JComboBox<option> box = new JComboBox<>(option.values());
+        JButton submitButton = new JButton("Submit");
 
-        GroupLayout.SequentialGroup seq=gl.createSequentialGroup()
-                                            .addComponent(box,120,200,200)
-                                            .addComponent(test1);
+        parameterValue = new JTextField();
+        parameterValue.setEditable(false);
 
-        GroupLayout.ParallelGroup paral = gl.createParallelGroup()
-                                            .addComponent(box,25,25,25)
-                                            .addComponent(test1);
+        JLabel errorLabel = new JLabel("None parameter selected");
+        errorLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+        errorLabel.setForeground(new Color(250, 20, 10));
+        errorLabel.setVisible(false);
+
+        JLabel parameterLabel = new JLabel("Parameter: ");
+        parameterLabel.setFont(new Font("Serif", Font.PLAIN, 16));
+        parameterLabel.setForeground(new Color(50, 50, 25));
+
+        actionLabel = new JLabel("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
+        actionLabel.setFont(new Font("Serif", Font.PLAIN, 16));
+        actionLabel.setForeground(new Color(50, 50, 25));
+
+        communicationLabel = new JLabel(formatToJlabel(Client.describe()),SwingConstants.CENTER);
+        communicationLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+        communicationLabel.setForeground(new Color(50, 50, 25));
+
+        group = new ButtonGroup();
+
+        //creating layoutGroups for my convenience
+        GroupLayout.ParallelGroup leftPanelParallel = gl.createParallelGroup(GroupLayout.Alignment.LEADING);
+        GroupLayout.SequentialGroup leftPanelSequential = gl.createSequentialGroup();
+
+        GroupLayout.SequentialGroup parameterSequential=gl.createSequentialGroup()
+                                            .addComponent(parameterLabel)
+                                            .addComponent(parameterValue,10,50,50);
+
+        GroupLayout.ParallelGroup parameterParallel = gl.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                            .addComponent(parameterLabel)
+                                            .addComponent(parameterValue,25,25,25);
+
+        //add every option to group as JRadioButton
+        for (option var:option.values()
+                ) {
+            JRadioButton button = new JRadioButton(var.action);
+            button.addItemListener(this);
+            group.add(button);
+            leftPanelParallel.addComponent(button,120,250,250);
+            leftPanelSequential.addComponent(button,25,25,25);
+        }
+
+        leftPanelParallel.addGroup(parameterSequential);
+        leftPanelSequential.addGroup(parameterParallel);
+
+        leftPanelParallel.addComponent(actionLabel);
+        leftPanelSequential.addComponent(actionLabel);
+
+        leftPanelParallel.addComponent(submitButton);
+        leftPanelSequential.addComponent(submitButton);
+
+        leftPanelParallel.addComponent(errorLabel);
+        leftPanelSequential.addComponent(errorLabel);
 
         gl.setHorizontalGroup(gl.createParallelGroup()
                 .addGroup(gl.createSequentialGroup()
-                        .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                                .addGroup(seq))
+                        .addGroup(leftPanelParallel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                                .addComponent(area2,100, 200,300)
-                                .addComponent(test2)))
+                                .addComponent(communicationLabel,300,600,600)))
+
         );
 
         gl.setVerticalGroup(gl.createSequentialGroup()
                 .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
+                        .addGroup(leftPanelSequential)
                         .addGroup(gl.createSequentialGroup()
-                                .addGroup(paral))
-                        .addGroup(gl.createSequentialGroup()
-                                .addComponent(area2,100, 200,300)
-                                .addComponent(test2)))
+                                .addComponent(communicationLabel)))
         );
 
-
-        box.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    Object item = e.getItem();
-                    // do something with object
-                    if(((option) item).parameter){
-                    seq.addComponent(area1,50,50,50);
-                    paral.addComponent(area1,25,25,25);
-                    }
+        //listener for parameterValue, check correctness and setting action parameter
+        parameterValue.addKeyListener(new KeyAdapter() {
+            public void keyReleased(KeyEvent event) {
+                String content = parameterValue.getText();
+                if(content.matches("[\\d]{1,3}")){
+                    if(Integer.parseInt(content) <= 0 ) content="0";
+                    else if(Integer.parseInt(content)>=200)content = "200";
+                        parameterValue.setText(content);
+                        action.setParameter(content);
+                        actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
                 }
+                else if(!content.equals("")) parameterValue.setText(content.substring(0,content.length()-1));
+                else { // sprawdz content czy = "" i sprawdz czy wybrana opcja ma parameter
+                    action.setParameter("none");
+                    actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
+                }
+
             }
         });
+
+
+        //submitButton listener, proceed request
+
+        //TO DO: add error to submit
+        submitButton.addActionListener(e -> {
+            if(!action.getOption().equals("")&&!action.getParameter().equals("none")) {
+                try {
+                    Client.request(action);
+                    communicationLabel.setText(formatToJlabel(Client.describe()));
+                    group.clearSelection();
+                    parameterValue.setText("");
+                    action.resetAction();
+                    actionLabel.setText("<html><br>Selected action: " + action.getOption() + "<br>Parameter: " + action.getParameter() + "<br></html>");
+
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }else errorLabel.setVisible(true);
+        });
+
 
         revalidate();
         repaint();
         pack();
         setTitle("JComboBox");
-        setSize(1366, 768);
+        setSize(900, 940);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
 
+    //action performed after RadioButton check
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        int sel = e.getStateChange();
+        if (sel == ItemEvent.SELECTED) {
+            JRadioButton button = (JRadioButton) e.getSource();
+            String selectedOption = button.getText();
+            action.setOption(selectedOption);
+            for (option var:option.values()  //checking all possible options if one matches selected option
+                 ) {
+                if(var.action.equals(selectedOption)) {
+                    parameterValue.setEditable(var.parameter);// setting parameterValue editable or not editable
+                    actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
+                    break;
+                }
+            }
+
+        }
+    }
+
+    //formating String into Jlabel format
+    //replacing new lines
+    private String formatToJlabel(String message){
+        message = message.replace(System.lineSeparator(),"<br><br>");
+        String returnString = "<html>";
+        returnString  = returnString.concat(message+"</h");
+        return returnString;
+    }
+
+    //main method
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {

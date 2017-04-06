@@ -37,8 +37,6 @@ public class Log {
 
         //check if log exist
         if(name==null) logCreate();
-        //split
-        String information[] = message.split(",");
         //open writer
         String file = new File( "." ).getCanonicalPath()+"/Logs/"+name;
         BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
@@ -46,13 +44,11 @@ public class Log {
         out.write("##########################################################################\n\n");
         out.write("Used command: "+action.getOption()+"\n");
         out.write("Parameter: "+action.getParameter()+"\n");
-        information[0] = information[0].replace("\"turn\"", "Month");
-        for (String text:information
-             ) {
-            out.write(text+"\n");
-        }
+        out.write(message);
         out.write("\n\n");
         //close writer
         out.close();
     }
+
+
 }
