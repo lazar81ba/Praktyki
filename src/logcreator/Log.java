@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Log {
     private String name; //name of current log
 
+
     public Log(){
         this.name=null;
     }
@@ -36,7 +37,8 @@ public class Log {
     public void writeLog(String message, Action action)throws Exception{
 
         //check if log exist
-        if(name==null) logCreate();
+        if(name==null||action.getOption().equals("Restart")) logCreate();
+
         //open writer
         String file = new File( "." ).getCanonicalPath()+"/Logs/"+name;
         BufferedWriter out = new BufferedWriter(new FileWriter(file,true));

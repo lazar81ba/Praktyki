@@ -3,42 +3,55 @@ package appclases;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.io.SyncFailedException;
 import java.util.*;
 
 
 public class Client {
     static private String email = null;
     static private String token = null;
-    static private LinkedList<String> eventList=null;
+    static private String eventList;
 
 
     public static void setAccount(Account account){
         email = account.getEmail();
         token = account.getToken();
-        eventList = new LinkedList<>();
+        eventList = "none";
         }
 
-
-
+    private static void resetEvents(boolean check){
+        if(check) eventList="";
+    }
+        //set events nie powinien dzialac na liscie, lepiej zapisac na stringu i obcinac nowe info
     private static String setEvents(String events){
+
         events = events.replace("events:","");
-        String[] elements = events.split(",");
-        String returnString="Events:";
-        for (String element:elements
-                ) {
-            if(!eventList.contains(element)){
-                returnString = returnString.concat(element+", ");
-                eventList.add(element);
-            }
-        }
-        returnString = returnString.concat(System.lineSeparator());
-        return returnString;
+        String returnString = events.replace(eventList+",","");
+        returnString = returnString.replaceAll(",",","+System.lineSeparator());
+        eventList=events;
+        return "Events:"+returnString+System.lineSeparator();
     }
 
 
+    public static boolean checkConnection() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        String requestEmail = email.replace("@","%40");
+        Request request = new Request.Builder()
+                .url("http://arcology.prime.future-processing.com/describe?login="+requestEmail+"&token="+token)
+                .get()
+                .addHeader("cache-control", "no-cache")
+                .addHeader("postman-token", "db449928-3f75-c02f-a49c-36b57cb6f869")
+                .build();
 
+        Response response = client.newCall(request).execute();
 
-    public static String request(Action action) throws IOException {
+        String output = response.body().string();
+        if(!output.equals("")) return true;
+
+        return false;
+    }
+
+    public static void request(Action action) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/json");
@@ -46,7 +59,7 @@ public class Client {
         if(action.getParameter()==null) {
             body = RequestBody.create(mediaType, "{\"Command\":\"" + action.getOption() + "\", \"Login\":\""+email+"\", \"Token\":\""+token+"\"}");
         }else{
-            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.getOption() + "\", \"Login\":\""+email+"\", \"Token\":\""+token+"\"}, \"Parameter\":\""+action.getParameter().toString()+"\"}");
+            body = RequestBody.create(mediaType, "{\"Command\":\"" + action.getOption() + "\", \"Login\":\""+email+"\", \"Token\":\""+token+"\", \"Parameter\":\""+ action.getParameter() +"\"}");
 
         }
         Request request = new Request.Builder()
@@ -57,9 +70,9 @@ public class Client {
                 .addHeader("postman-token", "75b37ba6-19ad-0577-de2c-0aa6d0577ce2")
                 .build();
 
-        Response response = client.newCall(request).execute();
-        String output = response.body().string();
-        return output;    }
+        client.newCall(request).execute();
+        resetEvents(action.getOption().equals("Restart"));
+    }
 
     public static String describe() throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -106,8 +119,8 @@ public class Client {
         events = setEvents(events);
 
         //erase neho and events
-        message = message.replaceAll("nehoRunes:\\[.*\\],","");
-        message = message.replaceAll("events:\\[.*\\]", "");
+        message = message.replaceAll("nehoRunes:\\[.*],","");
+        message = message.replaceAll("events:\\[.*]", "");
 
         //formating other part of message
         String information[] = message.split(",");

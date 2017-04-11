@@ -1,11 +1,11 @@
 
 import appclases.*;
 import appclases.Action;
+import logcreator.Log;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.Enumeration;
 
 
 import javax.swing.*;
@@ -14,7 +14,8 @@ import javax.swing.*;
 
 public class Application extends JFrame implements ItemListener{
 
-    private Action action;
+    private final Log log;
+    private final Action action;
     private JTextField parameterValue;
     private JLabel actionLabel;
     private JLabel communicationLabel;
@@ -37,12 +38,13 @@ public class Application extends JFrame implements ItemListener{
             this.action=action;
             this.parameter=parameter;
         }
-        private String action;
-        private boolean parameter;
+        private final String action;
+        private final boolean parameter;
 
     }
 
-    public Application() {
+    private Application() {
+        log = new Log();
         action = new Action();
         initUI();
     }
@@ -125,7 +127,7 @@ public class Application extends JFrame implements ItemListener{
             Client.setAccount(new Account(emailText.getText(),tokenText.getText()));
 
             try {
-                if(!Client.describe().equals("")){
+                if(Client.checkConnection()){
                     remove(cp);
                 createActionLayout();
                 }else errorLabel.setVisible(true);
@@ -138,8 +140,8 @@ public class Application extends JFrame implements ItemListener{
         repaint();
         pack();
         setTitle("JComboBox");
-        setSize(900, 940);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 600);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
     }
@@ -251,18 +253,19 @@ public class Application extends JFrame implements ItemListener{
 
         //submitButton listener, proceed request
 
-        //TO DO: add error to submit
         submitButton.addActionListener(e -> {
             if(!action.getOption().equals("")&&!action.getParameter().equals("none")) {
                 try {
                     Client.request(action);
-                    communicationLabel.setText(formatToJlabel(Client.describe()));
+                    String message = Client.describe();
+                    log.writeLog(message,action);
+                    communicationLabel.setText(formatToJlabel(message));
                     group.clearSelection();
                     parameterValue.setText("");
                     action.resetAction();
                     actionLabel.setText("<html><br>Selected action: " + action.getOption() + "<br>Parameter: " + action.getParameter() + "<br></html>");
 
-                } catch (IOException e1) {
+                } catch (Exception e1) {
                     e1.printStackTrace();
                 }
             }else errorLabel.setVisible(true);
@@ -273,8 +276,8 @@ public class Application extends JFrame implements ItemListener{
         repaint();
         pack();
         setTitle("JComboBox");
-        setSize(900, 940);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 600);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
@@ -302,7 +305,7 @@ public class Application extends JFrame implements ItemListener{
     //formating String into Jlabel format
     //replacing new lines
     private String formatToJlabel(String message){
-        message = message.replace(System.lineSeparator(),"<br><br>");
+        message = message.replace(System.lineSeparator(),"<br>");
         String returnString = "<html>";
         returnString  = returnString.concat(message+"</h");
         return returnString;
