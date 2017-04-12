@@ -24,12 +24,17 @@ public class Client {
     }
         //set events nie powinien dzialac na liscie, lepiej zapisac na stringu i obcinac nowe info
     private static String setEvents(String events){
-
-        events = events.replace("events:","");
-        String returnString = events.replace(eventList+",","");
+        String returnString =  new String("");
+        events = events.replace("events:"+System.lineSeparator(),"");
+        if(events.contains("Catastrophic")) returnString = "Catastrophic";
+        else if(events.contains("EndOfSimulation")) returnString = "EndOfSimulation";
+        else {
+            returnString = events.replace(eventList,"");
+            if(!returnString.equals("") && returnString.charAt(0)==',') returnString = returnString.substring(1);
+        }
         returnString = returnString.replaceAll(",",","+System.lineSeparator());
         eventList=events;
-        return "Events:"+returnString+System.lineSeparator();
+        return "Events:"+System.lineSeparator()+returnString+System.lineSeparator();
     }
 
 

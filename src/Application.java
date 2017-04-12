@@ -18,7 +18,7 @@ public class Application extends JFrame implements ItemListener{
     private final Action action;
     private JTextField parameterValue;
     private JLabel actionLabel;
-    private JLabel communicationLabel;
+    private JTextArea communicationTextArea;
     private ButtonGroup group;
 
 
@@ -174,9 +174,11 @@ public class Application extends JFrame implements ItemListener{
         actionLabel.setFont(new Font("Serif", Font.PLAIN, 16));
         actionLabel.setForeground(new Color(50, 50, 25));
 
-        communicationLabel = new JLabel(formatToJlabel(Client.describe()),SwingConstants.CENTER);
-        communicationLabel.setFont(new Font("Serif", Font.PLAIN, 14));
-        communicationLabel.setForeground(new Color(50, 50, 25));
+        communicationTextArea = new JTextArea(Client.describe(),20,20);
+        communicationTextArea.setLineWrap(true);
+        communicationTextArea.setWrapStyleWord(true);
+
+        JScrollPane scrollPane = new JScrollPane(communicationTextArea);
 
         group = new ButtonGroup();
 
@@ -219,15 +221,16 @@ public class Application extends JFrame implements ItemListener{
                         .addGroup(leftPanelParallel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                                .addComponent(communicationLabel,300,600,600)))
-
+                                //.addComponent(communicationLabel,300,600,600)))
+                                .addComponent(scrollPane,300,400,400)))
         );
 
         gl.setVerticalGroup(gl.createSequentialGroup()
                 .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addGroup(leftPanelSequential)
                         .addGroup(gl.createSequentialGroup()
-                                .addComponent(communicationLabel)))
+                                //.addComponent(communicationLabel)))
+                                .addComponent(scrollPane)))
         );
 
         //listener for parameterValue, check correctness and setting action parameter
@@ -259,7 +262,7 @@ public class Application extends JFrame implements ItemListener{
                     Client.request(action);
                     String message = Client.describe();
                     log.writeLog(message,action);
-                    communicationLabel.setText(formatToJlabel(message));
+                    communicationTextArea.setText(message);
                     group.clearSelection();
                     parameterValue.setText("");
                     action.resetAction();
