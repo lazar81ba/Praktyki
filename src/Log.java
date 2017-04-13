@@ -1,15 +1,11 @@
-package logcreator;
-
-
-import appclases.Action;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+    //this class is responsible for creating logs
 public class Log {
-    private String name; //name of current log
 
+    private String name; //name of current log
 
     public Log(){
         this.name=null;
@@ -17,8 +13,8 @@ public class Log {
 
     public void setName(String name){this.name=name;}
 
+        //creating new log, name is current date
     private void logCreate() throws IOException {
-
         //create name and path for new log
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -34,11 +30,10 @@ public class Log {
         directory.createNewFile();
     }
 
+        //writing information to log
     public void writeLog(String message, Action action)throws Exception{
-
-        //check if log exist
+        //check if log exist or last action was Restart
         if(name==null||action.getOption().equals("Restart")) logCreate();
-
         //open writer
         String file = new File( "." ).getCanonicalPath()+"/Logs/"+name;
         BufferedWriter out = new BufferedWriter(new FileWriter(file,true));
@@ -51,6 +46,5 @@ public class Log {
         //close writer
         out.close();
     }
-
 
 }

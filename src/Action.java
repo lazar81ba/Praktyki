@@ -1,19 +1,12 @@
-package appclases;
-
+    //this class is representation of actions for making execute command
 public class Action {
+
     private String option;
     private String parameter;
 
     public Action() {
         option="";
         parameter="";
-    }
-    public Action(String option){
-        this.option = option;parameter=null;
-    }
-    public Action(String option,String parameter){
-        this.option = option;
-        this.parameter = parameter;
     }
 
     public void resetAction(){
@@ -36,4 +29,5 @@ public class Action {
     public void setParameter(String parameter) {
         this.parameter = parameter;
     }
+
 }

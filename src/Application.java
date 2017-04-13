@@ -1,13 +1,6 @@
-
-import appclases.*;
-import appclases.Action;
-import logcreator.Log;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-
-
 import javax.swing.*;
 
 
@@ -21,8 +14,7 @@ public class Application extends JFrame implements ItemListener{
     private JTextArea communicationTextArea;
     private ButtonGroup group;
 
-
-    //options for RadioButtons
+        //options for RadioButtons
     private enum option{
         IMPORTFOOD ("Import Food",true),
         PRODUCE ("Produce",false),
@@ -38,6 +30,15 @@ public class Application extends JFrame implements ItemListener{
             this.action=action;
             this.parameter=parameter;
         }
+
+        static boolean doesItHaveParameter(String match){
+            for (option var:option.values()
+                 ) {
+                if(var.action.equals(match)) return var.parameter;
+            }
+            return false;
+        }
+
         private final String action;
         private final boolean parameter;
 
@@ -49,14 +50,24 @@ public class Application extends JFrame implements ItemListener{
         initUI();
     }
 
+        //main method
+    public static void main(String[] args) {
+
+        EventQueue.invokeLater(() -> {
+            Application ex = new Application();
+            ex.setVisible(true);
+        });
+    }
+
+        //initialize UI as start Layout
     private void initUI() {
-        createStartLayout();
+        createLoggingLayout();
     }
 
 
-
-    private void createStartLayout() {
-        // labels, fields
+        //function that creates and initialize logging layout
+    private void createLoggingLayout() {
+            // labels, fields
         JLabel email = new JLabel("Email");
         email.setFont(new Font("Serif", Font.PLAIN, 16));
         email.setForeground(new Color(50, 50, 25));
@@ -67,6 +78,7 @@ public class Application extends JFrame implements ItemListener{
 
         JTextField emailText = new JTextField(25);
         JTextField tokenText = new JTextField(25);
+
         JButton submitButton = new JButton("Submit");
 
         JLabel errorLabel = new JLabel("Cannot make connection");
@@ -74,15 +86,14 @@ public class Application extends JFrame implements ItemListener{
         errorLabel.setForeground(new Color(250, 20, 10));
         errorLabel.setVisible(false);
 
-        //setting email and token for convenience
+            //setting email and token for convenience
         emailText.setText("lazar81ba@gmail.com");
         tokenText.setText("61ADBBB5AEBBEAF640AEBEBFD0CB751F");
-
 
         Container pane = getContentPane();
         pane.setLayout(new GridBagLayout());
 
-        //making new Panel
+            //making new Panel
         JPanel cp=new JPanel();
         add(cp);
         GroupLayout gl = new GroupLayout(cp);
@@ -110,7 +121,7 @@ public class Application extends JFrame implements ItemListener{
         );
 
 
-        //listener for email text field if it changes, also checking email format
+            //listener for email text field if it changes, also checking email format
         emailText.addKeyListener(new KeyAdapter() {
             public void keyReleased(KeyEvent event) {
                 String content = emailText.getText();
@@ -122,10 +133,9 @@ public class Application extends JFrame implements ItemListener{
             }
         });
 
-        //button listener, setting account in client,removing panel
+            //button listener, setting account in client,removing panel
         submitButton.addActionListener(event -> {
             Client.setAccount(new Account(emailText.getText(),tokenText.getText()));
-
             try {
                 if(Client.checkConnection()){
                     remove(cp);
@@ -182,14 +192,15 @@ public class Application extends JFrame implements ItemListener{
 
         group = new ButtonGroup();
 
-        //creating layoutGroups for my convenience
+            //creating layoutGroups for convenience
         GroupLayout.ParallelGroup leftPanelParallel = gl.createParallelGroup(GroupLayout.Alignment.LEADING);
         GroupLayout.SequentialGroup leftPanelSequential = gl.createSequentialGroup();
 
+
+            //creating parameter information label
         GroupLayout.SequentialGroup parameterSequential=gl.createSequentialGroup()
                                             .addComponent(parameterLabel)
                                             .addComponent(parameterValue,10,50,50);
-
         GroupLayout.ParallelGroup parameterParallel = gl.createParallelGroup(GroupLayout.Alignment.LEADING)
                                             .addComponent(parameterLabel)
                                             .addComponent(parameterValue,25,25,25);
@@ -204,34 +215,36 @@ public class Application extends JFrame implements ItemListener{
             leftPanelSequential.addComponent(button,25,25,25);
         }
 
+            //add current parameter label
         leftPanelParallel.addGroup(parameterSequential);
         leftPanelSequential.addGroup(parameterParallel);
-
+            //add current action label
         leftPanelParallel.addComponent(actionLabel);
         leftPanelSequential.addComponent(actionLabel);
-
+            //add submit button
         leftPanelParallel.addComponent(submitButton);
         leftPanelSequential.addComponent(submitButton);
-
+            //add invisible error label
         leftPanelParallel.addComponent(errorLabel);
         leftPanelSequential.addComponent(errorLabel);
 
+
+        //add everything to panel
         gl.setHorizontalGroup(gl.createParallelGroup()
                 .addGroup(gl.createSequentialGroup()
                         .addGroup(leftPanelParallel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
-                                //.addComponent(communicationLabel,300,600,600)))
                                 .addComponent(scrollPane,300,400,400)))
         );
-
         gl.setVerticalGroup(gl.createSequentialGroup()
                 .addGroup(gl.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addGroup(leftPanelSequential)
                         .addGroup(gl.createSequentialGroup()
-                                //.addComponent(communicationLabel)))
                                 .addComponent(scrollPane)))
         );
+
+
 
         //listener for parameterValue, check correctness and setting action parameter
         parameterValue.addKeyListener(new KeyAdapter() {
@@ -240,26 +253,26 @@ public class Application extends JFrame implements ItemListener{
                 if(content.matches("[\\d]{1,3}")){
                     if(Integer.parseInt(content) <= 0 ) content="0";
                     else if(Integer.parseInt(content)>=200)content = "200";
-                        parameterValue.setText(content);
-                        action.setParameter(content);
-                        actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
+                    errorLabel.setVisible(false);
+                    parameterValue.setText(content);
+                    action.setParameter(content);
+                    actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
                 }
                 else if(!content.equals("")) parameterValue.setText(content.substring(0,content.length()-1));
-                else { // sprawdz content czy = "" i sprawdz czy wybrana opcja ma parameter
-                    action.setParameter("none");
+                else {
+                    action.setParameter("");
                     actionLabel.setText("<html><br>Selected action: "+action.getOption()+"<br>Parameter: "+action.getParameter()+"<br></html>");
                 }
 
             }
         });
 
-
-        //submitButton listener, proceed request
-
+        //submitButton listener, proceed executeCommand
         submitButton.addActionListener(e -> {
-            if(!action.getOption().equals("")&&!action.getParameter().equals("none")) {
+            //checking if action was set correctly
+            if(!action.getOption().equals("")&&( (!option.doesItHaveParameter(action.getOption())) || (option.doesItHaveParameter(action.getOption()) && !action.getParameter().equals("")) )) {
                 try {
-                    Client.request(action);
+                    Client.executeCommand(action);
                     String message = Client.describe();
                     log.writeLog(message,action);
                     communicationTextArea.setText(message);
@@ -267,13 +280,11 @@ public class Application extends JFrame implements ItemListener{
                     parameterValue.setText("");
                     action.resetAction();
                     actionLabel.setText("<html><br>Selected action: " + action.getOption() + "<br>Parameter: " + action.getParameter() + "<br></html>");
-
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
             }else errorLabel.setVisible(true);
         });
-
 
         revalidate();
         repaint();
@@ -283,7 +294,6 @@ public class Application extends JFrame implements ItemListener{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
-
 
     //action performed after RadioButton check
     @Override
@@ -301,25 +311,7 @@ public class Application extends JFrame implements ItemListener{
                     break;
                 }
             }
-
         }
     }
 
-    //formating String into Jlabel format
-    //replacing new lines
-    private String formatToJlabel(String message){
-        message = message.replace(System.lineSeparator(),"<br>");
-        String returnString = "<html>";
-        returnString  = returnString.concat(message+"</h");
-        return returnString;
-    }
-
-    //main method
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-            Application ex = new Application();
-            ex.setVisible(true);
-        });
-    }
 }

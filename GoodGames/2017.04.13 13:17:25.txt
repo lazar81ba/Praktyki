@@ -1,0 +1,874 @@
+##########################################################################
+
+Used command: Restart
+Parameter: 
+Month:1
+Events:
+SimulationStarted
+nehoRunes:null
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:0.0
+experimentScore:0.0
+totalScore:0.0
+nehoRunes:null
+foodQuantity:33.0
+waste:7.0
+socialCapital:75.0
+production:100.0
+foodCapacity:44.0
+arcologyIntegrity:30.0
+population:32.0
+populationCapacity:47.0
+
+
+##########################################################################
+
+Used command: Build Arcology
+Parameter: 130
+Month:2
+Events:
+ProductionChanged,
+ArcologyStableAndFunctioning,
+ArcologyIntegrityChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DH
+DH
+OH
+OH
+NN
+DH
+NN
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:500.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:26.3
+waste:10.25
+socialCapital:75.0
+production:65.0
+foodCapacity:44.0
+arcologyIntegrity:160.0
+population:32.0
+populationCapacity:47.0
+
+
+##########################################################################
+
+Used command: Expand Food Capacity
+Parameter: 115
+Month:3
+Events:
+ProductionChanged,
+FoodCapacityChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DH
+DH
+OH
+OH
+NN
+DH
+NN
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:500.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:17.975
+waste:12.25
+socialCapital:75.0
+production:40.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:32.0
+populationCapacity:47.0
+
+
+##########################################################################
+
+Used command: Expand Population Capacity
+Parameter: 112
+Month:4
+Events:
+ProductionChanged,
+PopulationCapacityChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DE
+DH
+OH
+OH
+NN
+DH
+NN
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:500.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:8.650
+waste:13.00
+socialCapital:75.0
+production:15.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:32.0
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 150
+Month:5
+Events:
+FoodQuantityChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+OH
+DH
+OH
+OH
+NN
+DH
+NN
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:500.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:148.950
+waste:13.75
+socialCapital:76.0
+production:15.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:32.0
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: We are ready
+Parameter: 119
+Month:6
+Events:
+PopulationChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+NN
+DE
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:500.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:97.225
+waste:14.50
+socialCapital:50.0
+production:15.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:151.0
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Propaganda
+Parameter: 90
+Month:7
+Events:
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+PopulationChanged,
+GloryForTheLeader,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+NN
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:600.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:65.425
+waste:14.80
+socialCapital:76.4164078649987
+production:6.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Produce
+Parameter: 
+Month:8
+Events:
+ProductionChanged,
+WasteChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DE
+OH
+OH
+DE
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:600.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:35.9963980655981885375
+waste:34.2358058032054343875
+socialCapital:71.4164078649987
+production:129.57203868803622925
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 120
+Month:9
+Events:
+FoodQuantityChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DE
+NN
+OH
+OH
+DE
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:600.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:123.32849516399547134375
+waste:40.7144077376072458500
+socialCapital:72.4164078649987
+production:129.57203868803622925
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 40
+Month:10
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+NN
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:600.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:107.42129129519184841875
+waste:6.1930096720090573125
+socialCapital:75.4164078649987
+production:109.57203868803622925
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Produce
+Parameter: 
+Month:11
+Events:
+ProductionChanged,
+PerfectStructure,
+BuildTheWorld,
+SocialCapitalChanged,
+WasteChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DE
+OH
+OH
+DE
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1250.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:77.16645759038369683750
+waste:39.4096674096163031625
+socialCapital:75.4164078649987
+production:200.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 40
+Month:12
+Events:
+WasteChanged,
+CleanArcology,
+SocialCapitalChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1350.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:61.61645759038369683750
+waste:9.0
+socialCapital:88.4164078649987
+production:180.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 98
+Month:13
+Events:
+FoodQuantityChanged,
+FoodWasted,
+SocialCapitalChanged,
+WasteChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DH
+DH
+OH
+OH
+DH
+DH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1450.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:138.64177120480815158125
+waste:18.61645759038369683750
+socialCapital:79.4164078649987
+production:180.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 18
+Month:14
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DE
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1450.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:122.78354240961630316250
+waste:9.16645759038369683750
+socialCapital:82.4164078649987
+production:171.0
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 9
+Month:15
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged,
+SurvivedTheEarthquake
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1700.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:107.15031361442445474375
+waste:8.49145759038369683750
+socialCapital:85.4164078649987
+production:166.5
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 8
+Month:16
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1700.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:91.35458481923260632500
+waste:8.61645759038369683750
+socialCapital:88.4164078649987
+production:162.5
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 50
+Month:17
+Events:
+FoodQuantityChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DE
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1700.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:121.49635602404075790625
+waste:16.74145759038369683750
+socialCapital:88.4164078649987
+production:162.5
+foodCapacity:159.0
+arcologyIntegrity:160.0
+population:155.5
+populationCapacity:159.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 16
+Month:18
+Events:
+WasteChanged,
+SocialCapitalChanged,
+SuperMotivated,
+FoodCapacityChanged,
+PopulationCapacityChanged,
+ArcologyIntegrityChanged,
+PopulationChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:105.57562722884890948750
+waste:9.46645759038369683750
+socialCapital:91.4164078649987
+production:174.5
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Produce
+Parameter: 
+Month:19
+Events:
+ProductionChanged,
+WasteChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+NN
+OH
+OH
+DE
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:69.65567149925524960625
+waste:50.73991145918731976250
+socialCapital:86.4164078649987
+production:200.0
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 50
+Month:20
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:53.73571576966158972500
+waste:9.48991145918731976250
+socialCapital:89.4164078649987
+production:175.0
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 110
+Month:21
+Events:
+FoodQuantityChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DH
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:143.44076004006792984375
+waste:18.23991145918731976250
+socialCapital:90.4164078649987
+production:175.0
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 18
+Month:22
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+DE
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:127.77080431047426996250
+waste:8.53991145918731976250
+socialCapital:93.4164078649987
+production:166.0
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Produce
+Parameter: 
+Month:23
+Events:
+ProductionChanged,
+WasteChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+NN
+OH
+OH
+DE
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:92.64137164647879861875
+waste:49.15886532799094268750
+socialCapital:88.4164078649987
+production:200.0
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Clean
+Parameter: 49
+Month:24
+Events:
+WasteChanged,
+SocialCapitalChanged,
+ProductionChanged,
+FoodQuantityChanged,
+WasteChanged
+nehoRunes:
+NN
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Not yet
+ but be aware
+isTerminated:false
+eventScore:1800.0
+experimentScore:0.0
+totalScore:0.0
+foodQuantity:77.01193898248332727500
+waste:8.93386532799094268750
+socialCapital:91.4164078649987
+production:175.5
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+
+##########################################################################
+
+Used command: Import Food
+Parameter: 80
+Month:25
+Events:
+FoodQuantityChanged,
+SocialCapitalChanged,
+FoodQuantityChanged,
+WasteChanged,
+EndOfSimulation
+nehoRunes:
+DH
+DH
+OH
+OH
+DH
+OH
+OH
+shouldIRestartExperimentAndCry:Perhaps
+ no idea
+isTerminated:true
+eventScore:21200.0
+experimentScore:19400.0
+totalScore:40600.0
+foodQuantity:136.99500631848785593125
+waste:17.70886532799094268750
+socialCapital:92.4164078649987
+production:175.5
+foodCapacity:169.0
+arcologyIntegrity:170.0
+population:155.5
+populationCapacity:169.0
+
+

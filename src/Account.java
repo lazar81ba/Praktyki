@@ -1,16 +1,12 @@
-package appclases;
-
+    //this class is representation of email and token as an account
 public class Account {
+
     private String email;
     private String token;
+
     public Account(String email, String token){
         this.email = email;
         this.token = token;
-    }
-
-    public Account() {
-        email=null;
-        token=null;
     }
 
     public String getEmail() {
